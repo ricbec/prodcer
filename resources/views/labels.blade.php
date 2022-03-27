@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+       
         <style>
             div {
                 color: {{$color}};
@@ -127,7 +127,7 @@
                 <tr>
                     <th>
                         <img class="center" 
-                            src="{{ asset('storage/Logo.png');}}">
+                            src="{{ asset('storage/'.$logo.'.png');}}">
                     </th>
                 </tr>
                 <tr>
@@ -167,29 +167,16 @@
                                 DESTINATARIO
                             </div>
                             <div class="text">
-                                @foreach (json_decode($invoice->customer->name) as $name)
-                                    {{ $name }}
-                                @endforeach
+                                
+                                    {{ $invoice->customer_name}}
+                                
                                 <br/>
-                                {{ $invoice->customer->address }}
+                                {{ $invoice->address }}
                                 <br/>
-                                <span class="bold-span">{{ $invoice->customer->city_name }}</span>
-                                <span class="bold-span">{{ $invoice->customer->state_name}}</span>
-                                <br/>Tel.
-                                @php
-                                    $count_phones = count(json_decode($invoice->customer->phones));
-                                @endphp
-                                @foreach (json_decode($invoice->customer->phones) as $phone)
-                                    @php
-                                        $count_phones--;
-                                    @endphp
-                                    @foreach ($phone as $phone_item)
-                                        {{ $phone_item }}
-                                    @endforeach
-                                    @if ($count_phones >0)
-                                        -
-                                    @endif
-                                @endforeach
+                                <span class="bold-span">{{ $invoice->city_name }}</span>
+                                <span class="bold-span">{{ $invoice->state_name}}</span>
+                                <br/>Tel. {{ $invoice->phones}}
+
                             </div>
                         </div>
                     </td>

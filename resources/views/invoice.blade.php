@@ -8,19 +8,19 @@
         <form method="POST" action="{{route('labelShow')}}">
             @csrf
            @php
-            //ddd($invoice->customer->phones);
+            /*dd($invoice->customer->phones);*/
            @endphp
             <div>
                 <label for ="name">Número</label>
-                <input name="name" type="text" required value="{{$invoice->name}}">
+                <input name="name" type="text" required readonly value="{{$invoice->name}}">
             </div>
             <div>
                 <label for ="datef">Fecha factura</label>
-                <input name="name" type="text" required value="{{$datef}}">
+                <input name="datef" type="text" required readonly value="{{$datef}}">
             </div>
             <div>
                 <label for ="customer_name">Nombre </label>
-                <input name="name" type="text" required 
+                <input name="customer_name" type="text" required readonly
                        value="@foreach(json_decode($invoice->customer->name) as $name){{$name}} @endforeach">
             </div>
             <div>
@@ -40,8 +40,8 @@
                 </div>
             <div>
                 <label for ="phones">Teléfonos</label>
-                <input name="state_name" type="text" required
-                       value ="@foreach (json_decode($invoice->customer->phones) as $phone)@foreach ($phone as $phone_item){{ $phone_item }} @endforeach @endforeach">
+                <input name="phones" type="text" required readonly
+                       value ="@foreach(json_decode($invoice->customer->phones) as $phone)@foreach($phone as $key => $phone_item)@if($key == 'indicative'){{'('.$phone_item.')'}}@else{{($phone_item)}}@endif @endforeach @endforeach">
             </div>
             <ul>
             @foreach ($invoice->items as $item)
